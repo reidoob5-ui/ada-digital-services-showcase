@@ -30,7 +30,7 @@ export const Route = createFileRoute("/contacto")({
 function Contacto() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [service, setService] = useState(services[0].title);
+  const [service, setService] = useState(services[0]?.title ?? "");
   const [message, setMessage] = useState("");
 
   function handleSubmit(event: FormEvent) {
