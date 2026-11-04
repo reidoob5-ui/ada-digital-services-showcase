@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check, MessageCircle } from "lucide-react";
-import { services, waLink, trustItems } from "@/lib/site";
+import { SITE_URL, services, waLink, trustItems } from "@/lib/site";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";

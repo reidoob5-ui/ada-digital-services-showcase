@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MessageCircle, Check } from "lucide-react";
-import { waLink, DEFAULT_WA_MESSAGE, whyChooseUs } from "@/lib/site";
+import { SITE_URL, waLink, DEFAULT_WA_MESSAGE, whyChooseUs } from "@/lib/site";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
