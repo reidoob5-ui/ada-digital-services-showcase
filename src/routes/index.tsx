@@ -2,9 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, ArrowRight, Lightbulb, Code2, Settings2, TrendingUp } from "lucide-react";
 import heroImg from "@/assets/hero-laptop.png";
 import {
+  SITE_URL,
   services,
   trustItems,
   whyChooseUs,
+  projectCases,
   waLink,
   DEFAULT_WA_MESSAGE,
 } from "@/lib/site";
@@ -33,9 +35,10 @@ export const Route = createFileRoute("/")({
         content:
           "Inovação que impulsiona o seu negócio: websites, aplicações, APIs, bots de trading, ERP, automação e marketplaces.",
       },
-      { property: "og:url", content: "/" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/` },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
 });
 
@@ -218,6 +221,44 @@ function Index() {
                 <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Projetos e cases */}
+        <section className="border-y border-border bg-card/40">
+          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28">
+            <SectionTitle
+              eyebrow="Projetos e Cases"
+              title="Experiência que se mede em resultados"
+              subtitle="Uma amostra dos projetos que já construímos para negócios como o seu."
+            />
+            <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {projectCases.slice(0, 3).map((project) => (
+                <article
+                  key={project.id}
+                  className="flex flex-col rounded-2xl border border-border bg-background p-6 transition-colors hover:border-gold/40"
+                >
+                  <span className="inline-flex w-fit items-center rounded-full border border-gold/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
+                    {project.category}
+                  </span>
+                  <h3 className="font-display mt-4 text-lg font-semibold text-foreground">
+                    {project.title}
+                  </h3>
+                  <p className="mt-3 flex-1 text-sm text-muted-foreground">
+                    {project.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+            <div className="mt-10 text-center">
+              <Link
+                to="/projetos"
+                className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-7 py-3 text-base font-semibold text-foreground transition-colors hover:bg-accent"
+              >
+                Ver todos os projetos
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
         </section>
 
