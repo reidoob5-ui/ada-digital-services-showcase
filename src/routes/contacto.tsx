@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { MessageCircle, Send, Smartphone } from "lucide-react";
-import { services, waLink, WHATSAPP_NUMBER_DISPLAY } from "@/lib/site";
+import { toast } from "sonner";
+import { SITE_URL, services, waLink, WHATSAPP_NUMBER_DISPLAY } from "@/lib/site";
+import { submitLead } from "@/lib/lead.functions";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
@@ -14,16 +16,39 @@ export const Route = createFileRoute("/contacto")({
       {
         name: "description",
         content:
-          "Solicite o seu orçamento pelo WhatsApp +244 925 856 294. Tire as suas dúvidas, converse connosco e receba a melhor proposta.",
+          "Solicite o seu orçamento pelo WhatsApp +244 925 856 294 ou pelo formulário. Tire as suas dúvidas, converse connosco e receba a melhor proposta.",
       },
       { property: "og:title", content: "Contacto — Ada Lovelace Technologies" },
       {
         property: "og:description",
         content: "Solicite o seu orçamento pelo WhatsApp +244 925 856 294.",
       },
-      { property: "og:url", content: "/contacto" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/contacto` },
     ],
-    links: [{ rel: "canonical", href: "/contacto" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/contacto` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ContactPage",
+          name: "Contacto — Ada Lovelace Technologies",
+          url: `${SITE_URL}/contacto`,
+          mainEntity: {
+            "@type": "Organization",
+            name: "Ada Lovelace Technologies",
+            url: `${SITE_URL}/`,
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+244925856294",
+              contactType: "customer service",
+              availableLanguage: "Portuguese",
+            },
+          },
+        }),
+      },
+    ],
   }),
 });
 
@@ -32,14 +57,36 @@ function Contacto() {
   const [phone, setPhone] = useState("");
   const [service, setService] = useState(services[0]?.title ?? "");
   const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    if (sending) return;
+    setSending(true);
+
     const parts = [`Olá! O meu nome é ${name || "—"}.`];
     if (phone) parts.push(`O meu contacto é ${phone}.`);
     parts.push(`Tenho interesse em: ${service}.`);
     if (message) parts.push(message);
-    window.open(waLink(parts.join(" ")), "_blank", "noopener,noreferrer");
+    const waUrl = waLink(parts.join(" "));
+
+    let stored = false;
+    try {
+      await submitLead({ data: { name, phone, service, projectDescription: message } });
+      stored = true;
+    } catch {
+      // The conversation still opens below so the request always reaches the team.
+    }
+
+    if (stored) {
+      toast.success("Pedido registado! Vamos abrir o WhatsApp para finalizar o contacto.");
+    } else {
+      toast.error(
+        "Não conseguimos registar o pedido, mas abrimos o WhatsApp para si. Tente novamente mais tarde.",
+      );
+    }
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+    setSending(false);
   }
 
   return (
@@ -94,13 +141,14 @@ function Contacto() {
                     Como funciona
                   </h2>
                   <p className="text-sm text-muted-foreground">
-                    O formulário abre uma conversa no WhatsApp com os seus dados preenchidos.
+                    O seu pedido fica registado na nossa equipa e a conversa abre no WhatsApp com os
+                    seus dados preenchidos.
                   </p>
                 </div>
               </div>
               <ol className="mt-4 space-y-2 text-sm text-muted-foreground">
                 <li>1. Preencha os seus dados e escolha o serviço.</li>
-                <li>2. Clique em enviar — a conversa abre no WhatsApp.</li>
+                <li>2. Clique em enviar — o pedido é registado e a conversa abre no WhatsApp.</li>
                 <li>3. A nossa equipa responde com a melhor proposta.</li>
               </ol>
             </div>
@@ -118,6 +166,7 @@ function Contacto() {
                 <input
                   type="text"
                   required
+                  maxLength={100}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ex.: João Silva"
@@ -130,6 +179,7 @@ function Contacto() {
                 </span>
                 <input
                   type="tel"
+                  maxLength={40}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+244 ..."
@@ -137,7 +187,7 @@ function Contacto() {
                 />
               </label>
               <label className="block sm:col-span-2">
-                <span className="text-sm font-medium text-foreground">Serviço de interesse</span>
+                <span className="text-sm font-medium text-foreground">Serviço desejado</span>
                 <select
                   value={service}
                   onChange={(e) => setService(e.target.value)}
@@ -151,22 +201,25 @@ function Contacto() {
                 </select>
               </label>
               <label className="block sm:col-span-2">
-                <span className="text-sm font-medium text-foreground">A sua mensagem</span>
+                <span className="text-sm font-medium text-foreground">Descrição do projeto</span>
                 <textarea
                   rows={4}
+                  required
+                  maxLength={2000}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Conte-nos brevemente o que precisa..."
+                  placeholder="Descreva o que precisa: o tipo de projeto, o objetivo e alguma detalhe importante..."
                   className="mt-2 w-full resize-none rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-ring"
                 />
               </label>
             </div>
             <button
               type="submit"
-              className="glow-gold mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+              disabled={sending}
+              className="glow-gold mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               <Send className="h-5 w-5" />
-              Enviar pelo WhatsApp
+              {sending ? "A enviar..." : "Enviar pelo WhatsApp"}
             </button>
           </form>
         </section>

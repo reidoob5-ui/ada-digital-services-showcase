@@ -24,9 +24,45 @@ export const Route = createFileRoute("/servicos")({
         content:
           "Soluções completas para todas as necessidades do seu negócio, com preços em Kwanzas claros e sem surpresas.",
       },
-      { property: "og:url", content: "/servicos" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/servicos` },
     ],
-    links: [{ rel: "canonical", href: "/servicos" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/servicos` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Serviços da Ada Lovelace Technologies",
+          itemListElement: services.map((service, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Service",
+              name: service.title,
+              description: service.description,
+              provider: {
+                "@type": "Organization",
+                name: "Ada Lovelace Technologies",
+                url: `${SITE_URL}/`,
+              },
+              areaServed: "Angola",
+              ...(service.plans
+                ? {
+                    offers: service.plans.map((plan) => ({
+                      "@type": "Offer",
+                      name: `${service.title} — ${plan.name}`,
+                      priceCurrency: "AOA",
+                      price: Number(plan.price.replace(/[^\d]/g, "")),
+                    })),
+                  }
+                : {}),
+            },
+          })),
+        }),
+      },
+    ],
   }),
 });
 

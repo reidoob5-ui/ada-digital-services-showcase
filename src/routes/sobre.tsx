@@ -21,9 +21,27 @@ export const Route = createFileRoute("/sobre")({
         content:
           "Tecnologia com propósito: qualidade, inovação e parceria de longo prazo com o seu negócio.",
       },
-      { property: "og:url", content: "/sobre" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/sobre` },
     ],
-    links: [{ rel: "canonical", href: "/sobre" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/sobre` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: "Sobre Nós — Ada Lovelace Technologies",
+          url: `${SITE_URL}/sobre`,
+          mainEntity: {
+            "@type": "Organization",
+            name: "Ada Lovelace Technologies",
+            url: `${SITE_URL}/`,
+            slogan: "Soluções digitais para um futuro sem limites",
+          },
+        }),
+      },
+    ],
   }),
 });
 
