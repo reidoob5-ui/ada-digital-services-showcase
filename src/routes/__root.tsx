@@ -8,6 +8,8 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
+import { SITE_URL } from "@/lib/site";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
@@ -106,6 +108,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Ada Lovelace Technologies",
+          url: `${SITE_URL}/`,
+          logo: `${SITE_URL}/favicon.png`,
+          slogan: "Soluções digitais para um futuro sem limites",
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+244925856294",
+            contactType: "customer service",
+            areaServed: "AO",
+            availableLanguage: "Portuguese",
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Ada Lovelace Technologies",
+          url: `${SITE_URL}/`,
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -134,6 +165,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <Toaster />
     </QueryClientProvider>
   );
 }

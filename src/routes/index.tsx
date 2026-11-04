@@ -2,9 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, ArrowRight, Lightbulb, Code2, Settings2, TrendingUp } from "lucide-react";
 import heroImg from "@/assets/hero-laptop.png";
 import {
+  SITE_URL,
   services,
   trustItems,
   whyChooseUs,
+  projectCases,
   waLink,
   DEFAULT_WA_MESSAGE,
 } from "@/lib/site";
