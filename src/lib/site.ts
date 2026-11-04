@@ -13,6 +13,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+export const SITE_URL = "https://ada-digital-services-showcase.lovable.app";
+
 export const WHATSAPP_NUMBER_DISPLAY = "+244 925 856 294";
 export const WHATSAPP_NUMBER_RAW = "244925856294";
 
@@ -178,6 +180,73 @@ export const whyChooseUs = [
     title: "Parceria de longo prazo",
     description: "Crescemos junto com o seu negócio, projeto após projeto.",
   },
+];
+
+export type ProjectCase = {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  tags: string[];
+};
+
+export const projectCases: ProjectCase[] = [
+  {
+    id: "restaurante-website",
+    title: "Website e menu digital para rede de restaurantes",
+    category: "Website",
+    description:
+      "Site institucional com menu digital, reservas por WhatsApp e página otimizada para pesquisas locais, permitindo que os clientes encontrem o restaurante e façam pedidos em poucos toques.",
+    tags: ["Website", "Menu digital", "SEO local", "WhatsApp"],
+  },
+  {
+    id: "erp-retalho",
+    title: "Sistema de gestão para comércio a retalho",
+    category: "ERP",
+    description:
+      "Sistema de vendas e estoque com relatórios de faturação, controlo de produtos e painel de acompanhamento diário para a gerência tomar decisões com dados reais.",
+    tags: ["ERP", "Vendas e estoque", "Relatórios", "Dashboard"],
+  },
+  {
+    id: "app-entregas",
+    title: "Aplicação de entregas com acompanhamento em tempo real",
+    category: "Aplicação",
+    description:
+      "Aplicação móvel para registo de pedidos, atribuição de entregas aos motoristas e acompanhamento do estado de cada encomenda, com notificações para o cliente final.",
+    tags: ["Aplicação", "Android e iOS", "Notificações", "Tempo real"],
+  },
+  {
+    id: "automacao-atendimento",
+    title: "Atendimento automático no WhatsApp",
+    category: "Automação",
+    description:
+      "Robô de atendimento que responde às perguntas mais frequentes, recolhe os dados do cliente e encaminha cada conversa para a equipa certa — reduzindo o tempo de resposta.",
+    tags: ["Automação", "WhatsApp", "Atendimento", "Integrações"],
+  },
+  {
+    id: "portal-imobiliario",
+    title: "Portal imobiliário com pesquisa avançada",
+    category: "Plataforma",
+    description:
+      "Plataforma de anúncios de imóveis com pesquisa por localização e preço, perfis de consultores e área de gestão de anúncios para a imobiliária.",
+    tags: ["Plataforma", "Pesquisa avançada", "Gestão de anúncios"],
+  },
+  {
+    id: "api-pagamentos",
+    title: "Integração de pagamentos e faturação",
+    category: "API",
+    description:
+      "API que liga o sistema de vendas da empresa a serviços de pagamento e emissão de documentos, com autenticação segura e documentação completa para a equipa técnica.",
+    tags: ["API", "Pagamentos", "Segurança", "Documentação"],
+  },
+];
+
+export const sitePages = [
+  { path: "/", priority: "1.0" },
+  { path: "/servicos", priority: "0.9" },
+  { path: "/projetos", priority: "0.8" },
+  { path: "/sobre", priority: "0.7" },
+  { path: "/contacto", priority: "0.8" },
 ];
 
 export const formulaSteps = [
