@@ -96,17 +96,17 @@ export const services: Service[] = [
   {
     id: "trading-bots",
     title: "Bots de Trading Automáticos",
-    tagline: "Robôs de trading com licença oficial.",
+    tagline: "Robôs desenvolvidos à medida da sua estratégia.",
     description:
-      "Automação de operações financeiras com estratégias personalizadas e gestão de risco, compatível com as principais corretoras.",
+      "Desenvolvemos bots de trading à medida para a sua conta, a partir da estratégia que definir. Não garantimos lucros: operar em mercados financeiros envolve risco de perda de capital.",
     icon: Bot,
     features: [
+      "IQ Option, Quotex, Pocket Option, Bullex e Avalon",
       "Estratégias personalizadas",
       "Gestão de risco",
       "Suporte e atualizações",
-      "Compatível com principais corretoras",
     ],
-    priceFrom: "350.000 Kz",
+    priceFrom: "120.000 Kz",
   },
   {
     id: "erp",
