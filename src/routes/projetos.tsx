@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MessageCircle } from "lucide-react";
+import aiTraderImg from "@/assets/ai-trader-pro.webp";
+import botExec1 from "@/assets/bot-mdg-delta-1.webp";
+import botExec2 from "@/assets/bot-mdg-delta-2.webp";
 import { SITE_URL, products, projectCases, waLink, DEFAULT_WA_MESSAGE } from "@/lib/site";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
@@ -91,6 +94,33 @@ function Projetos() {
                 </article>
             ))}
           </div>
+
+          <h2 className="font-display mt-16 text-2xl font-bold text-foreground">
+            Bots de trading em ação
+          </h2>
+          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
+            Capturas de ecrã de bots que desenvolvemos. Desenvolvemos bots à medida para IQ Option,
+            Quotex, Pocket Option, Bullex e Avalon, a partir de 120.000 Kz.
+          </p>
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {[
+              { src: aiTraderImg, alt: "Interface do AI Trader Pro: escolha da plataforma", caption: "Interface do AI Trader Pro: escolha da plataforma" },
+              { src: botExec1, alt: "Bot a operar numa conta IQ Option, com o histórico de operações no terminal", caption: "Bot em execução na IQ Option, com histórico de operações" },
+              { src: botExec2, alt: "Bot a operar numa conta IQ Option, com o histórico de operações no terminal", caption: "Outra execução do bot, com histórico de operações" },
+            ].map((shot) => (
+              <figure key={shot.caption} className="overflow-hidden rounded-2xl border border-border bg-card">
+                <img src={shot.src} alt={shot.alt} loading="lazy" className="w-full object-cover" />
+                <figcaption className="p-4 text-sm text-muted-foreground">{shot.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <p className="mt-4 max-w-3xl rounded-xl border border-border bg-card/60 p-4 text-xs text-muted-foreground">
+            Aviso de risco: operar em mercados financeiros, incluindo opções binárias, envolve risco
+            elevado de perda do capital investido. Resultados passados, como os das capturas, não
+            garantem resultados futuros e não prometemos lucros. Os bots executam a estratégia
+            definida e não eliminam o risco. IQ Option, Quotex, Pocket Option, Bullex e Avalon são
+            marcas dos respetivos titulares, sem qualquer ligação a nós.
+          </p>
 
           <h2 className="font-display mt-16 text-2xl font-bold text-foreground">
             Exemplos de soluções à medida

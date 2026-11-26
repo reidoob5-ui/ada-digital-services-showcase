@@ -274,13 +274,13 @@ export const products: Product[] = [
     url: "https://invoiceflow-reidoob5.vercel.app",
   },
   {
-    id: "bot-whatsapp",
-    name: "Bot de WhatsApp para negócios",
-    category: "Automação",
-    status: "Em desenvolvimento",
+    id: "ai-trader-pro",
+    name: "AI Trader Pro",
+    category: "Bots de trading",
+    status: "Sob encomenda",
     description:
-      "Atendimento automático no WhatsApp para vender (catálogo, carrinho, pedido) e marcar atendimentos, com IA para as perguntas livres. O motor está construído; ainda não está ligado a um número real.",
-    tags: ["WhatsApp", "IA", "Catálogo", "Marcações"],
+      "Bot de trading automático que escolhe a plataforma (IQ Option, Quotex, Pocket Option, Bullex ou Avalon) e executa a estratégia definida. Desenvolvido à medida para cada cliente. Não garante lucros e o trading envolve risco de perda de capital.",
+    tags: ["IQ Option", "Quotex", "Pocket Option", "Bullex", "Avalon"],
   },
 ];
 
