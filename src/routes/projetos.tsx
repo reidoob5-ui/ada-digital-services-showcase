@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MessageCircle } from "lucide-react";
 import aiTraderImg from "@/assets/ai-trader-pro.webp";
-import botExec1 from "@/assets/bot-mdg-delta-1.webp";
 import botExec2 from "@/assets/bot-mdg-delta-2.webp";
 import { SITE_URL, products, projectCases, waLink, DEFAULT_WA_MESSAGE } from "@/lib/site";
 import { Header } from "@/components/site/Header";
@@ -102,11 +101,10 @@ function Projetos() {
             Capturas de ecrã de bots que desenvolvemos. Desenvolvemos bots à medida para IQ Option,
             Quotex, Pocket Option, Bullex e Avalon, a partir de 120.000 Kz.
           </p>
-          <div className="mt-6 grid gap-6 md:grid-cols-3">
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
             {[
               { src: aiTraderImg, alt: "Interface do AI Trader Pro: escolha da plataforma", caption: "Interface do AI Trader Pro: escolha da plataforma" },
-              { src: botExec1, alt: "Bot a operar numa conta IQ Option, com o histórico de operações no terminal", caption: "Bot em execução na IQ Option, com histórico de operações" },
-              { src: botExec2, alt: "Bot a operar numa conta IQ Option, com o histórico de operações no terminal", caption: "Outra execução do bot, com histórico de operações" },
+              { src: botExec2, alt: "Bot a operar na IQ Option, com o histórico de operações no terminal", caption: "Bot em execução na IQ Option, com histórico de operações" },
             ].map((shot) => (
               <figure key={shot.caption} className="overflow-hidden rounded-2xl border border-border bg-card">
                 <img src={shot.src} alt={shot.alt} loading="lazy" className="w-full object-cover" />
