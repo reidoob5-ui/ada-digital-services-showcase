@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { MessageCircle, Send, Smartphone } from "lucide-react";
 import { toast } from "sonner";
@@ -52,11 +52,23 @@ export const Route = createFileRoute("/contacto")({
   }),
 });
 
+const BUDGETS = [
+  "Ainda não sei",
+  "Até 100.000 Kz",
+  "100.000 a 300.000 Kz",
+  "300.000 a 600.000 Kz",
+  "Mais de 600.000 Kz",
+];
+const DEADLINES = ["Sem pressa", "Até 1 mês", "1 a 3 meses", "Urgente"];
+
 function Contacto() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [service, setService] = useState(services[0]?.title ?? "");
   const [message, setMessage] = useState("");
+  const [budget, setBudget] = useState(BUDGETS[0]);
+  const [deadline, setDeadline] = useState(DEADLINES[0]);
+  const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
 
   async function handleSubmit(event: FormEvent) {
@@ -68,11 +80,17 @@ function Contacto() {
     if (phone) parts.push(`O meu contacto é ${phone}.`);
     parts.push(`Tenho interesse em: ${service}.`);
     if (message) parts.push(message);
+    parts.push(`Orçamento: ${budget}. Prazo: ${deadline}.`);
     const waUrl = waLink(parts.join(" "));
 
     let stored = false;
     try {
-      await submitLead({ data: { name, phone, service, projectDescription: message } });
+      await submitLead({ data: {
+          name,
+          phone,
+          service,
+          projectDescription: `${message}\n\nOrçamento: ${budget}\nPrazo: ${deadline}`,
+        } });
       stored = true;
     } catch {
       // The conversation still opens below so the request always reaches the team.
@@ -200,12 +218,40 @@ function Contacto() {
                   ))}
                 </select>
               </label>
+              <label className="block">
+                <span className="text-sm font-medium text-foreground">Orçamento previsto</span>
+                <select
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  className="mt-2 w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                >
+                  {BUDGETS.map((b) => (
+                    <option key={b} value={b}>
+                      {b}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-foreground">Prazo desejado</span>
+                <select
+                  value={deadline}
+                  onChange={(e) => setDeadline(e.target.value)}
+                  className="mt-2 w-full rounded-lg border border-input bg-background px-4 py-3 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                >
+                  {DEADLINES.map((d) => (
+                    <option key={d} value={d}>
+                      {d}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <label className="block sm:col-span-2">
                 <span className="text-sm font-medium text-foreground">Descrição do projeto</span>
                 <textarea
                   rows={4}
                   required
-                  maxLength={2000}
+                  maxLength={1800}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Descreva o que precisa: o tipo de projeto, o objetivo e alguma detalhe importante..."
@@ -213,6 +259,22 @@ function Contacto() {
                 />
               </label>
             </div>
+            <label className="mt-5 flex items-start gap-3 text-sm text-muted-foreground">
+              <input
+                type="checkbox"
+                required
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                className="mt-1 h-4 w-4"
+              />
+              <span>
+                Li e aceito a{" "}
+                <Link to="/privacidade" className="text-gold hover:underline">
+                  Política de Privacidade
+                </Link>
+                .
+              </span>
+            </label>
             <button
               type="submit"
               disabled={sending}

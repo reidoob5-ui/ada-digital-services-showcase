@@ -24,6 +24,14 @@ export function waLink(message: string) {
 
 export const DEFAULT_WA_MESSAGE = "Olá! Gostaria de solicitar um orçamento.";
 
+// Dados de identificação usados nas páginas legais. Altere aqui quando a empresa for registada.
+export const LEGAL = {
+  brand: "Ada Lovelace Technologies",
+  owner: "Tito Firmino Da Costa Antônio",
+  country: "Angola",
+  updated: "26 de novembro de 2026",
+};
+
 export type ServicePlan = {
   name: string;
   price: string;
@@ -290,6 +298,9 @@ export const sitePages = [
   { path: "/projetos", priority: "0.8" },
   { path: "/sobre", priority: "0.7" },
   { path: "/contacto", priority: "0.8" },
+  { path: "/como-trabalhamos", priority: "0.7" },
+  { path: "/privacidade", priority: "0.3" },
+  { path: "/termos", priority: "0.3" },
 ];
 
 export const formulaSteps = [

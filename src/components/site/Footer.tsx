@@ -47,6 +47,14 @@ export function Footer() {
             </li>
             <li>
               <Link
+                to="/como-trabalhamos"
+                className="text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Como Trabalhamos
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/sobre"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
@@ -86,6 +94,14 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-6 text-sm text-muted-foreground sm:flex-row sm:px-6">
           <p>© {new Date().getFullYear()} Ada Lovelace Technologies. Todos os direitos reservados.</p>
+          <div className="flex gap-4">
+            <Link to="/privacidade" className="transition-colors hover:text-foreground">
+              Privacidade
+            </Link>
+            <Link to="/termos" className="transition-colors hover:text-foreground">
+              Termos
+            </Link>
+          </div>
           <a
             href={waLink(DEFAULT_WA_MESSAGE)}
             target="_blank"

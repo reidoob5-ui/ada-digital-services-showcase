@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check, ArrowRight, Lightbulb, Code2, Settings2, TrendingUp } from "lucide-react";
-import heroImg from "@/assets/hero-laptop.png";
+import heroImg from "@/assets/hero-laptop.webp";
 import {
   SITE_URL,
   services,
