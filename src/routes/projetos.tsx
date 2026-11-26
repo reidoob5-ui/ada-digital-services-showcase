@@ -9,43 +9,22 @@ export const Route = createFileRoute("/projetos")({
   component: Projetos,
   head: () => ({
     meta: [
-      { title: "Projetos e Cases — Ada Lovelace Technologies" },
+      { title: "Soluções de Exemplo — Ada Lovelace Technologies" },
       {
         name: "description",
         content:
-          "Projetos e cases da Ada Lovelace Technologies: websites, sistemas de gestão, aplicações móveis, automações e plataformas que geram resultados reais para os nossos clientes.",
+          "Exemplos do que a Ada Lovelace Technologies pode construir: websites, sistemas de gestão, aplicações móveis, automações e plataformas à medida do seu negócio.",
       },
-      { property: "og:title", content: "Projetos e Cases — Ada Lovelace Technologies" },
+      { property: "og:title", content: "Soluções de Exemplo — Ada Lovelace Technologies" },
       {
         property: "og:description",
         content:
-          "Conheça os projetos que mostram a nossa experiência: websites, ERP, aplicações, automações e plataformas.",
+          "Exemplos de soluções que podemos construir: websites, ERP, aplicações, automações e plataformas.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/projetos` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/projetos` }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          name: "Projetos e Cases — Ada Lovelace Technologies",
-          itemListElement: projectCases.map((project, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            item: {
-              "@type": "CreativeWork",
-              name: project.title,
-              about: project.category,
-              description: project.description,
-              creator: { "@type": "Organization", name: "Ada Lovelace Technologies" },
-            },
-          })),
-        }),
-      },
-    ],
   }),
 });
 
@@ -58,14 +37,14 @@ function Projetos() {
         <section className="border-b border-border bg-card/40">
           <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 md:py-20">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-              Projetos e Cases
+              Soluções de Exemplo
             </p>
             <h1 className="font-display mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-              Experiência que se mede em resultados
+              O que podemos construir para o seu negócio
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-              Uma amostra dos projetos que já construímos — cada um desenhado à medida do negócio
-              do cliente, do primeiro contacto à entrega.
+              Exemplos ilustrativos de soluções que desenhamos à medida de cada negócio, do primeiro
+              contacto à entrega. Não são trabalhos de clientes reais.
             </p>
           </div>
         </section>
@@ -100,7 +79,7 @@ function Projetos() {
 
           <div className="glow-gold mt-16 rounded-3xl border border-gold/30 bg-gradient-to-br from-card to-neon-deep/20 p-8 text-center sm:p-12">
             <h2 className="font-display text-2xl font-bold text-foreground sm:text-3xl">
-              O seu projeto pode ser o próximo case
+              O seu projeto pode ser o primeiro
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
               Conte-nos a sua ideia e receba uma proposta à medida do seu negócio.

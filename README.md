@@ -1,6 +1,6 @@
-# Ada Digital Services
+# Ada Lovelace Technologies
 
-Site institucional da Ada Digital Services: apresenta os serviços da empresa
+Site institucional da Ada Lovelace Technologies: apresenta os serviços da empresa
 (websites, aplicações, sistemas, automação e mais), os planos em Kz e um formulário
 de pedido de orçamento que também abre a conversa por WhatsApp.
 

@@ -228,9 +228,9 @@ function Index() {
         <section className="border-y border-border bg-card/40">
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28">
             <SectionTitle
-              eyebrow="Projetos e Cases"
-              title="Experiência que se mede em resultados"
-              subtitle="Uma amostra dos projetos que já construímos para negócios como o seu."
+              eyebrow="Soluções de Exemplo"
+              title="O que podemos construir para si"
+              subtitle="Exemplos ilustrativos do que podemos construir para negócios como o seu."
             />
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {projectCases.slice(0, 3).map((project) => (
