@@ -34,5 +34,17 @@ export const submitLead = createServerFn({ method: "POST" })
       console.error("Failed to store contact submission:", error.message);
       throw new Error("Não foi possível guardar o seu pedido.");
     }
+    // Aviso ao dono (email/WhatsApp). Nunca falha o pedido: o lead já está guardado.
+    try {
+      const { notifyOwner } = await import("@/lib/notify.server");
+      await notifyOwner({
+        name: data.name,
+        phone: data.phone || null,
+        service: data.service,
+        projectDescription: data.projectDescription,
+      });
+    } catch (e) {
+      console.error("Aviso ao dono falhou:", e instanceof Error ? e.message : e);
+    }
     return { ok: true as const };
   });
