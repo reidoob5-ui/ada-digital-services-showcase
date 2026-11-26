@@ -6,7 +6,7 @@ import {
   services,
   trustItems,
   whyChooseUs,
-  projectCases,
+  products,
   waLink,
   DEFAULT_WA_MESSAGE,
 } from "@/lib/site";
@@ -228,25 +228,47 @@ function Index() {
         <section className="border-y border-border bg-card/40">
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:py-28">
             <SectionTitle
-              eyebrow="Soluções de Exemplo"
-              title="O que podemos construir para si"
-              subtitle="Exemplos ilustrativos do que podemos construir para negócios como o seu."
+              eyebrow="Produtos"
+              title="O que já construímos"
+              subtitle="Produtos nossos, com demonstração. O estado de cada um está indicado."
             />
             <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {projectCases.slice(0, 3).map((project) => (
+              {products.map((product) => (
                 <article
-                  key={project.id}
+                  key={product.id}
                   className="flex flex-col rounded-2xl border border-border bg-background p-6 transition-colors hover:border-gold/40"
                 >
-                  <span className="inline-flex w-fit items-center rounded-full border border-gold/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
-                    {project.category}
-                  </span>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex w-fit items-center rounded-full border border-gold/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
+                      {product.category}
+                    </span>
+                    <span className="text-xs font-medium text-muted-foreground">{product.status}</span>
+                  </div>
                   <h3 className="font-display mt-4 text-lg font-semibold text-foreground">
-                    {project.title}
+                    {product.name}
                   </h3>
-                  <p className="mt-3 flex-1 text-sm text-muted-foreground">
-                    {project.description}
-                  </p>
+                  <p className="mt-3 flex-1 text-sm text-muted-foreground">{product.description}</p>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {product.tags.map((tag) => (
+                      <li
+                        key={tag}
+                        className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                  {product.url && (
+                    <a
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold hover:underline"
+                    >
+                      Ver demonstração
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  )}
                 </article>
               ))}
             </div>
@@ -255,7 +277,7 @@ function Index() {
                 to="/projetos"
                 className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-7 py-3 text-base font-semibold text-foreground transition-colors hover:bg-accent"
               >
-                Ver todos os projetos
+                Ver produtos e soluções
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

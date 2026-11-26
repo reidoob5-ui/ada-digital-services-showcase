@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, MessageCircle } from "lucide-react";
-import { SITE_URL, projectCases, waLink, DEFAULT_WA_MESSAGE } from "@/lib/site";
+import { SITE_URL, products, projectCases, waLink, DEFAULT_WA_MESSAGE } from "@/lib/site";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
@@ -9,17 +9,17 @@ export const Route = createFileRoute("/projetos")({
   component: Projetos,
   head: () => ({
     meta: [
-      { title: "Soluções de Exemplo — Ada Lovelace Technologies" },
+      { title: "Produtos e Soluções — Ada Lovelace Technologies" },
       {
         name: "description",
         content:
-          "Exemplos do que a Ada Lovelace Technologies pode construir: websites, sistemas de gestão, aplicações móveis, automações e plataformas à medida do seu negócio.",
+          "Produtos construídos pela Ada Lovelace Technologies, com demonstração, e exemplos de soluções à medida: websites, sistemas de gestão, aplicações, automações e plataformas.",
       },
-      { property: "og:title", content: "Soluções de Exemplo — Ada Lovelace Technologies" },
+      { property: "og:title", content: "Produtos e Soluções — Ada Lovelace Technologies" },
       {
         property: "og:description",
         content:
-          "Exemplos de soluções que podemos construir: websites, ERP, aplicações, automações e plataformas.",
+          "Os nossos produtos e exemplos de soluções à medida.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_URL}/projetos` },
@@ -37,20 +37,68 @@ function Projetos() {
         <section className="border-b border-border bg-card/40">
           <div className="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 md:py-20">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
-              Soluções de Exemplo
+              Produtos e Soluções
             </p>
             <h1 className="font-display mx-auto mt-3 max-w-3xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
-              O que podemos construir para o seu negócio
+              O que já construímos e o que podemos construir
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-              Exemplos ilustrativos de soluções que desenhamos à medida de cada negócio, do primeiro
-              contacto à entrega. Não são trabalhos de clientes reais.
+              Produtos nossos, com demonstração e estado indicado, e exemplos ilustrativos de soluções à
+              medida. Os exemplos não são trabalhos de clientes reais.
             </p>
           </div>
         </section>
 
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <h2 className="font-display text-2xl font-bold text-foreground">Os nossos produtos</h2>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {products.map((product) => (
+                <article
+                  key={product.id}
+                  className="flex flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-gold/40"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex w-fit items-center rounded-full border border-gold/30 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold">
+                      {product.category}
+                    </span>
+                    <span className="text-xs font-medium text-muted-foreground">{product.status}</span>
+                  </div>
+                  <h3 className="font-display mt-4 text-lg font-semibold text-foreground">
+                    {product.name}
+                  </h3>
+                  <p className="mt-3 flex-1 text-sm text-muted-foreground">{product.description}</p>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {product.tags.map((tag) => (
+                      <li
+                        key={tag}
+                        className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                  {product.url && (
+                    <a
+                      href={product.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-gold hover:underline"
+                    >
+                      Ver demonstração
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  )}
+                </article>
+            ))}
+          </div>
+
+          <h2 className="font-display mt-16 text-2xl font-bold text-foreground">
+            Exemplos de soluções à medida
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Exemplos ilustrativos, não trabalhos de clientes reais.
+          </p>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projectCases.map((project) => (
               <article
                 key={project.id}

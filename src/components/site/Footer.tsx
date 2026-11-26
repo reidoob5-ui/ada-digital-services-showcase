@@ -42,7 +42,7 @@ export function Footer() {
                 to="/projetos"
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
-                Soluções de Exemplo
+                Produtos e Soluções
               </Link>
             </li>
             <li>

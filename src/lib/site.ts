@@ -241,6 +241,49 @@ export const projectCases: ProjectCase[] = [
   },
 ];
 
+export type Product = {
+  id: string;
+  name: string;
+  category: string;
+  status: string;
+  description: string;
+  tags: string[];
+  url?: string;
+};
+
+// Produtos próprios já construídos. O estado diz a verdade sobre cada um.
+export const products: Product[] = [
+  {
+    id: "agenda-aqui",
+    name: "Agenda Aqui",
+    category: "Plataforma SaaS",
+    status: "Online",
+    description:
+      "Sistema de marcações online para salões, barbearias, clínicas e outros profissionais: página de marcação pública, lembretes ao cliente, pagamentos por Multicaixa Express e IBAN, planos mensais e painel de administração.",
+    tags: ["Marcações", "Lembretes", "Multicaixa Express", "Multi-idioma"],
+    url: "https://agenda-ao.vercel.app",
+  },
+  {
+    id: "invoiceflow",
+    name: "InvoiceFlow",
+    category: "Faturação e gestão",
+    status: "Em desenvolvimento",
+    description:
+      "Plataforma de faturação e gestão financeira para pequenas e médias empresas: faturas, cobranças, despesas, assistente de IA e painel de assinaturas. O módulo fiscal está em preparação e ainda não está certificado pela AGT.",
+    tags: ["Faturação", "Cobranças", "Assistente de IA", "Painel admin"],
+    url: "https://invoiceflow-reidoob5.vercel.app",
+  },
+  {
+    id: "bot-whatsapp",
+    name: "Bot de WhatsApp para negócios",
+    category: "Automação",
+    status: "Em desenvolvimento",
+    description:
+      "Atendimento automático no WhatsApp para vender (catálogo, carrinho, pedido) e marcar atendimentos, com IA para as perguntas livres. O motor está construído; ainda não está ligado a um número real.",
+    tags: ["WhatsApp", "IA", "Catálogo", "Marcações"],
+  },
+];
+
 export const sitePages = [
   { path: "/", priority: "1.0" },
   { path: "/servicos", priority: "0.9" },
